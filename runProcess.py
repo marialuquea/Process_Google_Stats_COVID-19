@@ -34,18 +34,24 @@ def merger(output_path, input_paths):
 
 # Get important values for each part (retail, grocery...)
 def getValues(string):
-    values = ['']
+    print()
+    percentages = []
     dates = []
+    values = ['']
+    for x in string:
+        for i in x:
+            if '%' in i:
+                percentages.append(i)
+            if 'Sun' in i:
+                dates.append(i)
+    print(percentages)
+    print(dates)
     try:
-        values.append(string[0][0])
-        for x in string[3]:
-            if x != '' and not (len(x) > 4):
-                values.append(x)
-        for x in string[-1]:
-            if x != '':
-                dates.append(x)
-        values.append(dates[0])
-        values.append(dates[2])
+        values.append(string[0][0]) # Name
+        values.append(percentages[2]) # Percentage in the middle ignores the 40%s and 80%s
+        values.append(dates[0]) # First date from graph
+        values.append(dates[2]) # Last date from graph
+        print("values:", values)
         return values
     except Exception as e:
         print(e)
@@ -54,7 +60,12 @@ def getValues(string):
 
 
 if __name__ == '__main__':
+    
     '''
+    
+    NO NEED TO DO THIS AGAIN, ONCE WAS ENOUGH AS THE FILES ARE ALREADY IN 
+    THE FOLDERS :) 
+    
     # split first 2 pages of each country from folder gdata2020-04-10
     paths = glob.glob('gdata2020-04-10/*.pdf')
     for path in paths:
@@ -68,10 +79,12 @@ if __name__ == '__main__':
         print(name, paths)
         merger(name, paths)
     print("Success!")
-
+    '''
+    
     ###############################################
     # ONLY USE THIS PART ONCE AS THERE IS A LIMIT #
     ###############################################
+    
     # Convert PDF to CSV with API - I reached my limit :/
     import pdftables_api
     paths = glob.glob('PDFs/*.pdf')
@@ -79,10 +92,10 @@ if __name__ == '__main__':
         print(path)
         name = 'PDFs/'+path[5:-4]
         print(name)
-        c = pdftables_api.Client('9xlqz5nj7uh8')
+        c = pdftables_api.Client('9xlqz5nj7uh8') #CHANGE THIS KEY TO FRANCESCO'S KEY
         c.csv(path, name)
 
-    '''
+    
 
     # Read CSV files from folder PDFs
     paths = glob.glob('PDFs/*.csv')
@@ -110,8 +123,6 @@ if __name__ == '__main__':
                                 short.append(dataset[i+x])
                         except:
                             print("EOF")
-                    for x in short:
-                        print(x)
                     final.append(getValues(short))
 
             i += 1
