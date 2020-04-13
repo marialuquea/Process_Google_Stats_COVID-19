@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Apr  9 23:40:14 2020
+Created on Mon Apr 13 20:40:38 2020
 
 @author: Maria
+
+This file splits the PDFs from the folder gdata2020-4-10 and creates a new folder 'output' 
+with all the 2-paged PDF of each country.
+
 """
 
 import os
 import glob
-from PyPDF2 import PdfFileReader, PdfFileWriter
 import csv
+from PyPDF2 import PdfFileReader, PdfFileWriter
 
 # split pages1 and 2 from every PDF
 def pdf_splitter(path):
@@ -34,71 +38,68 @@ def merger(output_path, input_paths):
 
 # Get important values for each part (retail, grocery...)
 def getValues(string):
-    print()
     percentages = []
     dates = []
     values = ['']
+    months = ['Jan ', 'Feb ', 'Mar ', 'Apr ', 'May ', 'Jun ',
+              'Jul ', 'Aug ', 'Sep ', 'Oct ', 'Nov ', 'Dec ']
     for x in string:
         for i in x:
             if '%' in i:
                 percentages.append(i)
-            if 'Sun' in i:
+            if any(word in i for word in months):
                 dates.append(i)
-    print(percentages)
-    print(dates)
     try:
         values.append(string[0][0]) # Name
         values.append(percentages[2]) # Percentage in the middle ignores the 40%s and 80%s
         values.append(dates[0]) # First date from graph
         values.append(dates[2]) # Last date from graph
-        print("values:", values)
-        return values
-    except Exception as e:
-        print(e)
-        return values
+    except: print('...')
+    finally: return values
+    
+def checkEmptyDates(final):
+    try:
+        final2 = []
+        for i in range(0, len(final), 7):
+            country = []
+            date1 = ''
+            date2 = ''
+            if len(final[i]) == 1: country.append(final[i])
+            for j in range(1,7): country.append(final[i+j])
+            for a in country:
+                if len(a) == 5: 
+                    date1 = a[3]
+                    date2 = a[4]
+            for a in country:
+                if len(a) == 3:
+                    a.append(date1)
+                    a.append(date2)
+                final2.append(a)
+    finally: return final2
 
 
 
 if __name__ == '__main__':
-    
-    '''
-    
-    NO NEED TO DO THIS AGAIN, ONCE WAS ENOUGH AS THE FILES ARE ALREADY IN 
-    THE FOLDERS :) 
-    
     # split first 2 pages of each country from folder gdata2020-04-10
+    # Change name of folder if PDFs are in another folder
     paths = glob.glob('gdata2020-04-10/*.pdf')
     for path in paths:
         pdf_splitter(path)
 
     # merge page 1 and 2 of each country and output them to folder PDFs
-    files = glob.glob('output/*.pdf')
+    files = glob.glob('output/*.pdf') 
     for page in range(0, len(files), 2):
         paths = [files[page], files[page+1]]
         name = "PDFs/" + files[page][18:35] +".pdf"
-        print(name, paths)
+        print(name, paths) 
         merger(name, paths)
     print("Success!")
-    '''
     
-    ###############################################
-    # ONLY USE THIS PART ONCE AS THERE IS A LIMIT #
-    ###############################################
     
-    # Convert PDF to CSV with API - I reached my limit :/
-    import pdftables_api
-    paths = glob.glob('PDFs/*.pdf')
-    for path in paths:
-        print(path)
-        name = 'PDFs/'+path[5:-4]
-        print(name)
-        c = pdftables_api.Client('9xlqz5nj7uh8') #CHANGE THIS KEY TO FRANCESCO'S KEY
-        c.csv(path, name)
-
     
 
-    # Read CSV files from folder PDFs
-    paths = glob.glob('PDFs/*.csv')
+    # Read CSV files from folder CSVs
+    paths = glob.glob('CSVs/*.csv')
     final = []
     for path in paths:
         dataset = []
@@ -109,7 +110,6 @@ if __name__ == '__main__':
 
         # Read only valuable information
         titles = ['Retail', 'Grocery', 'Parks', 'Transit', 'Work', 'Residential']
-        print("\n\n",dataset[1][0])
         final.append([dataset[1][0]])
         i = 0
         while i < len(dataset):
@@ -121,12 +121,12 @@ if __name__ == '__main__':
                             if any(word in dataset[i+x][0] for word in titles): break
                             else:
                                 short.append(dataset[i+x])
-                        except:
-                            print("EOF")
+                        except: print("...")
                     final.append(getValues(short))
-
             i += 1
-
+            
+    # Check for empty dates and correct
+    final = checkEmptyDates(final)
 
     # Save info to a file
     with open('final.csv', 'w', newline='') as file:
