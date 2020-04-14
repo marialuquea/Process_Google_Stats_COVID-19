@@ -71,6 +71,7 @@ def getValues(short):
     except: print('')
     finally: return sector
     
+    
 def checkEmptyDates(final):
     try:
         final2 = []
@@ -91,6 +92,7 @@ def checkEmptyDates(final):
                 final2.append(a)
     finally: return final2
 
+
 def readCSV(path):
     dataset = []
     with open(path, encoding="utf8") as csv_file:
@@ -98,6 +100,7 @@ def readCSV(path):
         for row in csv_reader:
             dataset.append(row)
     return dataset
+
 
 if __name__ == '__main__':
     
@@ -117,10 +120,8 @@ if __name__ == '__main__':
 #    print("Success!")
 #    
     
-    
-
     # Read CSV files from folder CSVs
-    paths = glob.glob('CSVs/AE*.csv')
+    paths = glob.glob('CSVs/*.csv')
     final = []
     for path in paths:
         
@@ -129,11 +130,13 @@ if __name__ == '__main__':
         # Read only valuable information
         titles = ['Retail', 'Grocery', 'Parks', 'Transit', 'Work', 'Residential']
         
-        country = CountryData(dataset[1][0])
+        countryName = dataset[1][0] + ' - ' + path[5:len(path)]
+        country = CountryData(countryName)
         
         i = 0
         while i < len(dataset):
             if len(dataset[i]) != 0:
+#                print(dataset[i])
                 if any(word in dataset[i][0] for word in titles):
                     short = [[dataset[i][0]]]
                     for x in range(1, 12): # for the next 12 lines check if the section ends
