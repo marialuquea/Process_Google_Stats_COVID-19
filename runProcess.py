@@ -132,35 +132,53 @@ def readCSV(path):
     return dataset
 
 
-if __name__ == '__main__':
+
+##################################################
+#               Main starts here                 #
+##################################################
     
-#    # split first 2 pages of each country from folder gdata2020-04-10
-#    # Change name of folder if PDFs are in another folder
-#    paths = glob.glob('gdata2020-04-10/*.pdf')
-#    for path in paths:
-#        pdf_splitter(path)
-#
-#    # merge page 1 and 2 of each country and output them to folder PDFs
-#    files = glob.glob('output/*.pdf') 
-#    for page in range(0, len(files), 2):
-#        paths = [files[page], files[page+1]]
-#        name = "PDFs/" + files[page][18:35] +".pdf"
-#        print(name, paths) 
-#        merger(name, paths)
-#    print("Success!")
-#    
-    ########################################
-    #   Read CSV files from folder CSVs    #
-    ########################################
+def splitPDFs(folder):
+    try:
+        # split first 2 pages of each country from folder gdata2020-04-10
+        # Change name of folder if PDFs are in another folder
+        paths = glob.glob(folder + '/*.pdf')
+        for path in paths:
+            pdf_splitter(path)
+        print('PDFs splitted!')
+    except Exception as e: print(e)
+
+def mergePDFs():
+    try:
+        # merge page 1 and 2 of each country and output them to folder PDFs
+        files = glob.glob('output/*.pdf') 
+        for page in range(0, len(files), 2):
+            paths = [files[page], files[page+1]]
+            name = "PDFs/" + files[page][18:35] +".pdf"
+            print(name, paths) 
+            merger(name, paths)
+        print("PDFs merged!")
+    except Exception as e: print(e)
+
+def convertToCSV(key):
+    # Convert PDF to CSV with API - I reached my limit :/
+    try:
+        import pdftables_api
+        paths = glob.glob('PDF/*.pdf')
+        for path in paths:
+            name = 'PDF/'+path[5:-4]
+            c = pdftables_api.Client(key)
+            c.csv(path, name)
+        print('Success!')
+    except Exception as e: print(e)
+        
+        
+def processCSVs(output_name):
     paths = glob.glob('CSVs/*.csv')
     final = []
     for path in paths:
-        
         dataset = readCSV(path)
-        
         # Read only valuable information
         titles = ['Retail', 'Grocery', 'Parks', 'Transit', 'Work', 'Residential']
-        
         countryName = dataset[1][0] + ' - ' + path[5:len(path)]
         country = CountryData(countryName)
         percentages = []
@@ -176,7 +194,7 @@ if __name__ == '__main__':
                     
                 if any(word in dataset[i][0] for word in titles):
                     short = [[dataset[i][0]]]
-                    for x in range(1, 15): # for the next 12 lines check if the section ends
+                    for x in range(1, 15): # for the next 15 lines check if the section ends
                         try:
                             #when sector is complete
                             if any(word in dataset[i+x][0] for word in titles): 
@@ -197,10 +215,7 @@ if __name__ == '__main__':
             i += 1
         
         percentages = getPercentage(percentages)
-        
         final.append([country.name])
-        
-        
         for i in range(len(country.sectors)):
             # set percentages
             country.sectors[i].name.percent = percentages[i]
@@ -209,13 +224,13 @@ if __name__ == '__main__':
                 last.append(i)
             final.append(last)
             
-            
     # Check for empty dates and correct
     final = checkEmptyDates(final)
     for a in final:
         print(a)
 
     # Save info to a file
-    with open('final.csv', 'w', newline='') as file:
+    with open(output_name+'.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(final)
+    print('Information saved to file', output_name+'.csv')
