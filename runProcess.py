@@ -94,12 +94,15 @@ def checkEmptyDates(final):
 
 
 def getPercentage(percentages):
+    # Clean list from unwanted info
+    percentages = [x for x in percentages if '* Not' not in x]
+    
     final = []
+    percentage = ''
     for i in range(0, len(percentages), 5):
         short = []
         for j in range(5):
             short.append(percentages[i+j])
-            
         percent_set = set(short)
         if len(percent_set) == 5: # if percentage is not 40% or 80%
             percentage = [ x for x in percent_set if "40" not in x and '80' not in x][0]
@@ -109,7 +112,6 @@ def getPercentage(percentages):
             if percentages.count('+40%') == 2: percentage = '+40%'
             if percentages.count('-40%') == 2: percentage = '-40%'
         final.append(percentage)
-        
     return final
     
 
@@ -141,7 +143,7 @@ if __name__ == '__main__':
 #    
     
     # Read CSV files from folder CSVs
-    paths = glob.glob('CSVs/ZM*.csv')
+    paths = glob.glob('CSVs/*.csv')
     final = []
     for path in paths:
         
@@ -156,10 +158,10 @@ if __name__ == '__main__':
         i = 0
         while i < len(dataset):
             if len(dataset[i]) != 0:
-                
+#                print(dataset[i])
                 # Get percentages
                 for item in dataset[i]:
-                    if '%' in item: 
+                    if '%' in item or 'Not enough data' in item: 
                         if '\n' in item: percentages.append(item.split('\n')[0])
                         else: percentages.append(item)
                     
@@ -180,7 +182,6 @@ if __name__ == '__main__':
                                 sector = getValues(short)
                                 if len(country.sectors) == 5:
                                     country.add_sector(sector)
-                            print('...')
             i += 1
         
         percentages = getPercentage(percentages)
@@ -196,16 +197,12 @@ if __name__ == '__main__':
                 last.append(i)
             final.append(last)
             
-#        print(country.name)
-#        for s in country.sectors:
-#            print(s.name.getSector())
+        print('\n',country.name)
+        for s in country.sectors:
+            print(s.name.getSector())
         
         
-        
-        
-        print("\n--END OF CSV FILE--\n")
-        
-        
+      
     # Check for empty dates and correct
 #    final = checkEmptyDates(final)
 
