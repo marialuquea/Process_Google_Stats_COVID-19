@@ -73,24 +73,32 @@ def getValues(short):
     
     
 def checkEmptyDates(final):
+#    print(final, '\n')
     try:
         final2 = []
         for i in range(0, len(final), 7):
             country = []
             date1 = ''
             date2 = ''
+            # country's values
             if len(final[i]) == 1: country.append(final[i])
             for j in range(1,7): country.append(final[i+j])
+            # get date
             for a in country:
-                if len(a) == 5: 
+                if len(a) == 5 and a[3] != '' and a[4] != '': 
                     date1 = a[3]
                     date2 = a[4]
+            # append date
             for a in country:
-                if len(a) == 3:
-                    a.append(date1)
-                    a.append(date2)
+                if len(a) > 1:
+                    if a[3] == '': a[3] = date1
+                    if a[4] == '': a[4] = date2
+                
                 final2.append(a)
-    finally: return final2
+    except Exception as e:
+        print(e)
+    finally: 
+        return final2
 
 
 def getPercentage(percentages):
@@ -197,14 +205,14 @@ if __name__ == '__main__':
                 last.append(i)
             final.append(last)
             
-        print('\n',country.name)
-        for s in country.sectors:
-            print(s.name.getSector())
+#        print('\n',country.name)
+#        for s in country.sectors:
+#            print(s.name.getSector())
         
         
       
     # Check for empty dates and correct
-#    final = checkEmptyDates(final)
+    final = checkEmptyDates(final)
 
     # Save info to a file
     with open('final.csv', 'w', newline='') as file:
