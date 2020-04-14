@@ -115,10 +115,10 @@ def getPercentage(percentages):
         if len(percent_set) == 5: # if percentage is not 40% or 80%
             percentage = [ x for x in percent_set if "40" not in x and '80' not in x][0]
         else: # if percentage is either 40 or 80
-            if percentages.count('+80%') == 2: percentage = '+80%'
-            if percentages.count('-80%') == 2: percentage = '-80%'
-            if percentages.count('+40%') == 2: percentage = '+40%'
-            if percentages.count('-40%') == 2: percentage = '-40%'
+            if percentages.count('+80%') == 7: percentage = '+80%'
+            if percentages.count('-80%') == 7: percentage = '-80%'
+            if percentages.count('+40%') == 7: percentage = '+40%'
+            if percentages.count('-40%') == 7: percentage = '-40%'
         final.append(percentage)
     return final
     
@@ -205,14 +205,11 @@ if __name__ == '__main__':
                 last.append(i)
             final.append(last)
             
-#        print('\n',country.name)
-#        for s in country.sectors:
-#            print(s.name.getSector())
-        
-        
-      
+            
     # Check for empty dates and correct
     final = checkEmptyDates(final)
+    for a in final:
+        print(a)
 
     # Save info to a file
     with open('final.csv', 'w', newline='') as file:

@@ -21,7 +21,7 @@
  ,Residential,+17%,Sun Feb 16,Sun Mar 29
 "Angola March 29, 2020 - AO_Mobility_Repor.csv"
  ,Retail & recreation,-61%,Sun Feb 16,Sun Mar 29
- ,Grocery & pharmacy,-61%,Sun Feb 16,Sun Mar 29
+ ,Grocery & pharmacy,-40%,Sun Feb 16,Sun Mar 29
  ,Parks,-39%,Sun Feb 16,Sun Mar 29
  ,Transit stations,-57%,Sun Feb 16,Sun Mar 29
  ,Workplaces,-11%,Sun Feb 16,Sun Mar 29
@@ -30,7 +30,7 @@
  ,Retail & recreation,-86%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-61%,Sun Feb 16,Sun Mar 29
  ,Parks,-89%,Sun Feb 16,Sun Mar 29
- ,Transit stations,-89%,Sun Feb 16,Sun Mar 29
+ ,Transit stations,-80%,Sun Feb 16,Sun Mar 29
  ,Workplaces,-57%,Sun Feb 16,Sun Mar 29
  ,Residential,+27%,Sun Feb 16,Sun Mar 29
 "Austria March 29, 2020 - AT_Mobility_Repor.csv"
@@ -50,7 +50,7 @@
 "Aruba March 29, 2020 - AW_Mobility_Repor.csv"
  ,Retail & recreation,-88%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-66%,Sun Feb 16,Sun Mar 29
- ,Parks,-66%,Sun Feb 16,Sun Mar 29
+ ,Parks,-80%,Sun Feb 16,Sun Mar 29
  ,Transit stations,-88%,Sun Feb 16,Sun Mar 29
  ,Workplaces,-72%,Sun Feb 16,Sun Mar 29
  ,Residential,+20%,Sun Feb 16,Sun Mar 29
@@ -99,7 +99,7 @@
 "Bahrain March 29, 2020 - BH_Mobility_Repor.csv"
  ,Retail & recreation,-45%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-22%,Sun Feb 16,Sun Mar 29
- ,Parks,-22%,Sun Feb 16,Sun Mar 29
+ ,Parks,-40%,Sun Feb 16,Sun Mar 29
  ,Transit stations,-38%,Sun Feb 16,Sun Mar 29
  ,Workplaces,-25%,Sun Feb 16,Sun Mar 29
  ,Residential,+16%,Sun Feb 16,Sun Mar 29
@@ -190,7 +190,7 @@ Côte d'Ivoire - CI_Mobility_Repor.csv
 "Colombia March 29, 2020 - CO_Mobility_Repor.csv"
  ,Retail & recreation,-86%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-68%,Sun Feb 16,Sun Mar 29
- ,Parks,-68%,Sun Feb 16,Sun Mar 29
+ ,Parks,-80%,Sun Feb 16,Sun Mar 29
  ,Transit stations,-82%,Sun Feb 16,Sun Mar 29
  ,Workplaces,-58%,Sun Feb 16,Sun Mar 29
  ,Residential,+26%,Sun Feb 16,Sun Mar 29
@@ -206,7 +206,7 @@ Côte d'Ivoire - CI_Mobility_Repor.csv
  ,Grocery & pharmacy,-48%,Sun Feb 16,Sun Mar 29
  ,Parks,-57%,Sun Feb 16,Sun Mar 29
  ,Transit stations,-88%,Sun Feb 16,Sun Mar 29
- ,Workplaces,-88%,Sun Feb 16,Sun Mar 29
+ ,Workplaces,-40%,Sun Feb 16,Sun Mar 29
  ,Residential,+19%,Sun Feb 16,Sun Mar 29
 "Czechia March 29, 2020 - CZ_Mobility_Repor.csv"
  ,Retail & recreation,-73%,Sun Feb 16,Sun Mar 29
@@ -230,7 +230,7 @@ Côte d'Ivoire - CI_Mobility_Repor.csv
  ,Workplaces,-28%,Sun Feb 16,Sun Mar 29
  ,Residential,+9%,Sun Feb 16,Sun Mar 29
 "Dominican Republic March 29, 2020 - DO_Mobility_Repor.csv"
- ,Retail & recreation,,Sun Feb 16,Sun Mar 29
+ ,Retail & recreation,-80%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-63%,Sun Feb 16,Sun Mar 29
  ,Parks,-73%,Sun Feb 16,Sun Mar 29
  ,Transit stations,-84%,Sun Feb 16,Sun Mar 29
@@ -253,7 +253,7 @@ Côte d'Ivoire - CI_Mobility_Repor.csv
 "Egypt March 29, 2020 - EG_Mobility_Repor.csv"
  ,Retail & recreation,-50%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-24%,Sun Feb 16,Sun Mar 29
- ,Parks,-24%,Sun Feb 16,Sun Mar 29
+ ,Parks,-40%,Sun Feb 16,Sun Mar 29
  ,Transit stations,-52%,Sun Feb 16,Sun Mar 29
  ,Workplaces,-35%,Sun Feb 16,Sun Mar 29
  ,Residential,+15%,Sun Feb 16,Sun Mar 29
@@ -314,7 +314,7 @@ Côte d'Ivoire - CI_Mobility_Repor.csv
  ,Workplaces,+3%,Sun Feb 16,Sun Mar 29
  ,Residential,+9%,Sun Feb 16,Sun Mar 29
 "Greece March 29, 2020 - GR_Mobility_Repor.csv"
- ,Retail & recreation,,Sun Feb 16,Sun Mar 29
+ ,Retail & recreation,-80%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-41%,Sun Feb 16,Sun Mar 29
  ,Parks,-55%,Sun Feb 16,Sun Mar 29
  ,Transit stations,-76%,Sun Feb 16,Sun Mar 29
@@ -657,7 +657,7 @@ New Zealand - NZ_Mobility_Repor.csv
 "Portugal March 29, 2020 - PT_Mobility_Repor.csv"
  ,Retail & recreation,-83%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-59%,Sun Feb 16,Sun Mar 29
- ,Parks,-59%,Sun Feb 16,Sun Mar 29
+ ,Parks,-80%,Sun Feb 16,Sun Mar 29
  ,Workplaces,-53%,Sun Feb 16,Sun Mar 29
  ,Residential,+22%,Sun Feb 16,Sun Mar 29
 "Paraguay March 29, 2020 - PY_Mobility_Repor.csv"
@@ -759,7 +759,7 @@ New Zealand - NZ_Mobility_Repor.csv
 "Trinidad and Tobago March 29, 2020 - TT_Mobility_Repor.csv"
  ,Retail & recreation,-29%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,+10%,Sun Feb 16,Sun Mar 29
- ,Parks,+10%,Sun Feb 16,Sun Mar 29
+ ,Parks,-40%,Sun Feb 16,Sun Mar 29
  ,Workplaces,-17%,Sun Feb 16,Sun Mar 29
  ,Residential,+9%,Sun Feb 16,Sun Mar 29
 "Taiwan March 29, 2020 - TW_Mobility_Repor.csv"
@@ -793,7 +793,7 @@ New Zealand - NZ_Mobility_Repor.csv
  ,Workplaces,-33%,Sun Feb 16,Sun Mar 29
  ,Residential,+10%,Sun Feb 16,Sun Mar 29
 "Arizona March 29, 2020 - US_Arizona_Mobili.csv"
- ,Retail & recreation,,Sun Feb 16,Sun Mar 29
+ ,Retail & recreation,-40%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-17%,Sun Feb 16,Sun Mar 29
  ,Parks,-7%,Sun Feb 16,Sun Mar 29
  ,Workplaces,-33%,Sun Feb 16,Sun Mar 29
@@ -814,7 +814,7 @@ New Zealand - NZ_Mobility_Repor.csv
  ,Retail & recreation,-51%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-27%,Sun Feb 16,Sun Mar 29
  ,Parks,-12%,Sun Feb 16,Sun Mar 29
- ,Workplaces,-60%,Sun Feb 16,Sun Mar 29
+ ,Workplaces,-40%,Sun Feb 16,Sun Mar 29
  ,Residential,+13%,Sun Feb 16,Sun Mar 29
 "Connecticut March 29, 2020 - US_Connecticut_Mo.csv"
  ,Retail & recreation,-56%,Sun Feb 16,Sun Mar 29
@@ -985,7 +985,7 @@ United States - US_Mobility_Repor.csv
  ,Workplaces,-46%,Sun Feb 16,Sun Mar 29
  ,Residential,+16%,Sun Feb 16,Sun Mar 29
 "North Carolina March 29, 2020 - US_North_Carolina.csv"
- ,Retail & recreation,,Sun Feb 16,Sun Mar 29
+ ,Retail & recreation,-40%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-15%,Sun Feb 16,Sun Mar 29
  ,Parks,+13%,Sun Feb 16,Sun Mar 29
  ,Workplaces,-35%,Sun Feb 16,Sun Mar 29
@@ -1054,7 +1054,7 @@ South Dakota - US_South_Dakota_M.csv
  ,Retail & recreation,-41%,Sun Feb 16,Sun Mar 29
  ,Grocery & pharmacy,-14%,Sun Feb 16,Sun Mar 29
  ,Parks,+26%,Sun Feb 16,Sun Mar 29
- ,Workplaces,-44%,Sun Feb 16,Sun Mar 29
+ ,Workplaces,-40%,Sun Feb 16,Sun Mar 29
  ,Residential,+10%,Sun Feb 16,Sun Mar 29
 "Vermont March 29, 2020 - US_Vermont_Mobili.csv"
  ,Retail & recreation,-62%,Sun Feb 16,Sun Mar 29
