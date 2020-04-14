@@ -68,7 +68,7 @@ def getValues(short):
 #            if percentages.count('-40%') == 2: percentage = '-40%'
 #        sector.percent = percentage
             
-    except: print('')
+    except Exception as e: print('getValues\t\t', e)
     finally: return sector
     
     
@@ -96,7 +96,7 @@ def checkEmptyDates(final):
                 
                 final2.append(a)
     except Exception as e:
-        print(e)
+        print('checkEmptyDates\t\t',e)
     finally: 
         return final2
 
@@ -149,8 +149,9 @@ if __name__ == '__main__':
 #        merger(name, paths)
 #    print("Success!")
 #    
-    
-    # Read CSV files from folder CSVs
+    ########################################
+    #   Read CSV files from folder CSVs    #
+    ########################################
     paths = glob.glob('CSVs/*.csv')
     final = []
     for path in paths:
@@ -175,7 +176,7 @@ if __name__ == '__main__':
                     
                 if any(word in dataset[i][0] for word in titles):
                     short = [[dataset[i][0]]]
-                    for x in range(1, 12): # for the next 12 lines check if the section ends
+                    for x in range(1, 15): # for the next 12 lines check if the section ends
                         try:
                             #when sector is complete
                             if any(word in dataset[i+x][0] for word in titles): 
@@ -185,11 +186,14 @@ if __name__ == '__main__':
                             # keep adding info to sector until complete
                             else:
                                 short.append(dataset[i+x])
-                        except: 
+                        except Exception as e: 
+                            # residential sometimes wasn't getting added because it was
+                            # at the end of the file, this part just fixes that bug
                             if short[0][0] == 'Residential': 
                                 sector = getValues(short)
                                 if len(country.sectors) == 5:
                                     country.add_sector(sector)
+                            print('---> main\t\t', e)
             i += 1
         
         percentages = getPercentage(percentages)
@@ -200,7 +204,7 @@ if __name__ == '__main__':
         for i in range(len(country.sectors)):
             # set percentages
             country.sectors[i].name.percent = percentages[i]
-            last = [' ']
+            last = ['']
             for i in country.sectors[i].name.getSector():
                 last.append(i)
             final.append(last)
