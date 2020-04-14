@@ -1,10 +1,13 @@
 # Process_Google_Stats_COVID-19
 
-Run downloadPDFs.sh to download all PDFs from https://www.google.com/covid19/mobility/
+Run api.py to download, process and save into a file Google's information on COVID-19
 
-In runProcess.py change line 82 change the key to your key created here: https://pdftables.com/pdf-to-excel-api
-
-Run runProcess.py to process them and save all info into one file
 ```shell
-$ python runProcess.py
+$ python api.py
 ```
+
+![Screenshot](img/1.png)
+
+CSV file output:
+
+![Screenshot](img/2.png)

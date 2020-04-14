@@ -32,27 +32,30 @@ def ask():
             
     if number == 1: 
         print('\nGetting PDFs from Google...')
-        process = subprocess.Popen(['downloadPDFs.sh'])
-        process.wait() # Wait for process to complete.
-        # iterate on the stdout line by line
-        for line in process.stdout.readlines():
-            print(line)
-            
+        sh = subprocess.Popen(["bash", "downloadPDFs.sh"])
+        sh.wait()   
+        print('All PDFs downloaded!')
+           
     if number == 2: 
-        folder = input('Name of folder where PDFs to be converted are: ')
-        print('\nSplitting PDFs to get the first 2 pages...')
-#        splitPDFs(folder)
+        folder = input('Input folder (where PDFs to be converted are): ')
+        output = input('Output folder (where PDFs will appear): ')
+        splitPDFs(folder, output)
+        
     if number == 3: 
-        print('\nMerging PDFs...')
-#        mergePDFs()
+        input_dir = input('Input folder (where split PDFs are): ')
+        output = input('Output folder (where merged PDFs will appear - must already exist): ')
+        mergePDFs(input_dir, output)
+        
     if number == 4: 
         key = input('API personal key to use: ')
-        print('Converting to CSV...')
+        print('Not currently working as this part costs money - uncomment line 52 in the api.py script for this part to work')
 #        convertToCSV(key)
+        
     if number == 5: 
+        input_dir = input('Input folder (where CSVs are): ')
         output_name = input('What do you want to name the output file?: ')
         print('Processing CSV files...')
-#        processCSVs(output_name)
+        processCSVs(input_dir, output_name)
 
     return number
 
