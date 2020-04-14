@@ -42,14 +42,14 @@ def getValues(short):
     # Name
     sector = Sector(short[0][0])
     
-    percentages = []
+#    percentages = []
     dates = []
     months = ['Jan ', 'Feb ', 'Mar ', 'Apr ', 'May ', 'Jun ',
               'Jul ', 'Aug ', 'Sep ', 'Oct ', 'Nov ', 'Dec ']
     for x in short:
         for i in x:
-            if '%' in i:
-                percentages.append(i)
+#            if '%' in i:
+#                percentages.append(i)
             if any(word in i for word in months):
                 dates.append(i)
     try:
@@ -57,16 +57,16 @@ def getValues(short):
         sector.startDate = dates[0]
         sector.endDate = dates[2]
         
-        # Percentages
-        percent_set = set(percentages)
-        if len(percent_set) == 5: # if percentage is not 40% or 80%
-            percentage = [ x for x in percent_set if "40" not in x and '80' not in x][0]
-        else: # if percentage is either 40 or 80
-            if percentages.count('+80%') == 2: percentage = '+80%'
-            if percentages.count('-80%') == 2: percentage = '-80%'
-            if percentages.count('+40%') == 2: percentage = '+40%'
-            if percentages.count('-40%') == 2: percentage = '-40%'
-        sector.percent = percentage
+#        # Percentages
+#        percent_set = set(percentages)
+#        if len(percent_set) == 5: # if percentage is not 40% or 80%
+#            percentage = [ x for x in percent_set if "40" not in x and '80' not in x][0]
+#        else: # if percentage is either 40 or 80
+#            if percentages.count('+80%') == 2: percentage = '+80%'
+#            if percentages.count('-80%') == 2: percentage = '-80%'
+#            if percentages.count('+40%') == 2: percentage = '+40%'
+#            if percentages.count('-40%') == 2: percentage = '-40%'
+#        sector.percent = percentage
             
     except: print('')
     finally: return sector
@@ -92,6 +92,26 @@ def checkEmptyDates(final):
                 final2.append(a)
     finally: return final2
 
+
+def getPercentage(percentages):
+    final = []
+    for i in range(0, len(percentages), 5):
+        short = []
+        for j in range(5):
+            short.append(percentages[i+j])
+            
+        percent_set = set(short)
+        if len(percent_set) == 5: # if percentage is not 40% or 80%
+            percentage = [ x for x in percent_set if "40" not in x and '80' not in x][0]
+        else: # if percentage is either 40 or 80
+            if percentages.count('+80%') == 2: percentage = '+80%'
+            if percentages.count('-80%') == 2: percentage = '-80%'
+            if percentages.count('+40%') == 2: percentage = '+40%'
+            if percentages.count('-40%') == 2: percentage = '-40%'
+        final.append(percentage)
+        
+    return final
+    
 
 def readCSV(path):
     dataset = []
@@ -121,7 +141,7 @@ if __name__ == '__main__':
 #    
     
     # Read CSV files from folder CSVs
-    paths = glob.glob('CSVs/*.csv')
+    paths = glob.glob('CSVs/ZM*.csv')
     final = []
     for path in paths:
         
@@ -132,11 +152,17 @@ if __name__ == '__main__':
         
         countryName = dataset[1][0] + ' - ' + path[5:len(path)]
         country = CountryData(countryName)
-        
+        percentages = []
         i = 0
         while i < len(dataset):
             if len(dataset[i]) != 0:
-#                print(dataset[i])
+                
+                # Get percentages
+                for item in dataset[i]:
+                    if '%' in item: 
+                        if '\n' in item: percentages.append(item.split('\n')[0])
+                        else: percentages.append(item)
+                    
                 if any(word in dataset[i][0] for word in titles):
                     short = [[dataset[i][0]]]
                     for x in range(1, 12): # for the next 12 lines check if the section ends
@@ -157,15 +183,25 @@ if __name__ == '__main__':
                             print('...')
             i += 1
         
-        print(country.name)
-        for s in country.sectors:
-            print(s.name.getSector())
-            
+        percentages = getPercentage(percentages)
+        
         final.append([country.name])
-        for sector in country.sectors:
-            last = ['']
-            for i in sector.name.getSector(): last.append(i)
+        
+        
+        for i in range(len(country.sectors)):
+            # set percentages
+            country.sectors[i].name.percent = percentages[i]
+            last = [' ']
+            for i in country.sectors[i].name.getSector():
+                last.append(i)
             final.append(last)
+            
+#        print(country.name)
+#        for s in country.sectors:
+#            print(s.name.getSector())
+        
+        
+        
         
         print("\n--END OF CSV FILE--\n")
         
