@@ -32,7 +32,7 @@ def ask():
             
     if number == 1: 
         print('\nGetting PDFs from Google...')
-        sh = subprocess.Popen(["bash", "downloadPDFs.sh"])
+        sh = subprocess.Popen1(["bash", "downloadPDFs.sh"])
         sh.wait()   
         print('All PDFs downloaded!')
            
