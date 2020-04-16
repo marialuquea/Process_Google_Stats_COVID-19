@@ -172,8 +172,8 @@ def convertToCSV(key, inputFolder, outputFolder):
             return
         for path in paths:
             name = outputFolder+path[len(inputFolder):-4]
-#            c = pdftables_api.Client(key)
-#            c.csv(path, name)
+            c = pdftables_api.Client(key)
+            c.csv(path, name)
             print(name)
     except Exception as e: print(e)
 
