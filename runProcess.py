@@ -155,13 +155,13 @@ def mergePDFs(path, output):
             print('Empty or wrong folder')
     except Exception as e: print(e)
 
-def convertToCSV(key):
-    # Convert PDF to CSV with API 
+def convertToCSV(key, inputFolder):
+    # Convert PDF to CSV with API
     try:
         import pdftables_api
-        paths = glob.glob('PDF/*.pdf')
+        paths = glob.glob(inputFolder+'/*.pdf')
         for path in paths:
-            name = 'PDF/'+path[5:-4]
+            name = inputFolder+'/'+path[5:-4]
             c = pdftables_api.Client(key)
             c.csv(path, name)
         print('Success!')

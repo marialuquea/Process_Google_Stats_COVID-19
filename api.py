@@ -40,16 +40,17 @@ def ask():
         folder = input('Input folder (where PDFs to be converted are): ')
         output = input('Output folder (where PDFs will appear): ')
         splitPDFs(folder, output)
-        
+
     if number == 3: 
         input_dir = input('Input folder (where split PDFs are): ')
         output = input('Output folder (where merged PDFs will appear - must already exist): ')
         mergePDFs(input_dir, output)
-        
-    if number == 4: 
+
+    if number == 4:
         key = input('API personal key to use: ')
+        inputFolder = input('Input folder (where merged PDFs are located):')
         print('Not currently working as this part costs money - uncomment line 52 in the api.py script for this part to work')
-#        convertToCSV(key)
+        convertToCSV(key, inputFolder)
         
     if number == 5: 
         input_dir = input('Input folder (where CSVs are): ')
