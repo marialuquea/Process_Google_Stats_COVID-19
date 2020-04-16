@@ -246,7 +246,7 @@ def processCSVs(input_folder, output_name):
         final = checkEmptyDates(final)
         
         # Order alphabetically by name
-        #final.sort(key=lambda x: x.name)
+        final.sort(key=lambda x: x.name)
         
         # Print info to console
         for country in final:
