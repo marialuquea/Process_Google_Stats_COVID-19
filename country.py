@@ -18,14 +18,13 @@ class Sector(object):
     
 
 class CountryData(object):
-    def __init__(self, name):
+    def __init__(self):
         
-        self.name = name
+        self.name = ''
         self.sectors = []
         
     def add_sector(self, sector):
         self.sectors.append(Sector(sector))
-        
         
       
     

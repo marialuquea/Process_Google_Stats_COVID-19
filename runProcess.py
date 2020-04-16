@@ -53,41 +53,29 @@ def getValues(short):
             if any(word in i for word in months):
                 dates.append(i)
     try:
-        # Dates
+        # Dates - might be empty
         sector.startDate = dates[0]
         sector.endDate = dates[2]
         
-    except Exception as e: print('getValues\t\t', e)
+    except: pass
     finally: return sector
     
     
 def checkEmptyDates(final):
-#    print(final, '\n')
     try:
-        final2 = []
-        for i in range(0, len(final), 7):
-            country = []
+        for country in final:
             date1 = ''
             date2 = ''
-            # country's values
-            if len(final[i]) == 1: country.append(final[i])
-            for j in range(1,7): country.append(final[i+j])
-            # get date
-            for a in country:
-                if len(a) == 5 and a[3] != '' and a[4] != '': 
-                    date1 = a[3]
-                    date2 = a[4]
-            # append date
-            for a in country:
-                if len(a) > 1:
-                    if a[3] == '': a[3] = date1
-                    if a[4] == '': a[4] = date2
-                
-                final2.append(a)
+            for sector in country.sectors:
+                if sector.name.startDate != '': date1 = sector.name.startDate
+                if sector.name.endDate != '': date2 = sector.name.endDate
+            for sector in country.sectors:
+                if sector.name.startDate == '': sector.name.startDate = date1
+                if sector.name.endDate == '': sector.name.endDate = date2
     except Exception as e:
         print('checkEmptyDates\t\t',e)
     finally: 
-        return final2
+        return final
 
 
 def getPercentage(percentages):
@@ -120,8 +108,18 @@ def readCSV(path):
             dataset.append(row)
     return dataset
 
+def checkDuplicates(country):
+    already_there = []
+    duplicates = []
+    for s in country.sectors: already_there.append(s.name.getSector()[0])
+    for s in already_there:
+        if already_there.count(s) > 1: duplicates.append(s)
+    for s in country.sectors:
+        if any(word in s.name.getSector()[0] for word in duplicates): 
+            country.sectors.remove(s)
+    return country
 
-
+    
 ##################################################
 #               Main starts here                 #
 ##################################################
@@ -177,28 +175,6 @@ def convertToCSV(key, inputFolder, outputFolder):
             print(name)
     except Exception as e: print(e)
 
-def orderAlphabetically(final):
-    countries = []
-    for i in range(0, len(final), 7):
-#        print(final[i])
-        country = [final[i][0]]
-        for j in range(1,7):
-            for item in final[i+j]:
-                country.append(item)
-        countries.append(country)
-    final = sorted(countries, key=itemgetter(0))
-    
-    countries = []
-    for row in final:
-        countries.append([row[0]]) # country name
-        countries.append(row[1:6]) # retail
-        countries.append(row[6:11]) # grocery
-        countries.append(row[11:16]) # parks
-        countries.append(row[16:21]) # transit
-        countries.append(row[21:26]) # workplace
-        countries.append(row[26:31]) # residential
-    return countries
-     
 def processCSVs(input_folder, output_name):
     if os.path.isdir(input_folder + '/'):
         paths = glob.glob(input_folder+'/*.csv')
@@ -207,13 +183,19 @@ def processCSVs(input_folder, output_name):
             dataset = readCSV(path)
             # Read only valuable information
             titles = ['Retail', 'Grocery', 'Parks', 'Transit', 'Work', 'Residential']
-            countryName = dataset[1][0] + ' - ' + path[5:len(path)]
-            country = CountryData(countryName)
+            country = CountryData()
             percentages = []
             i = 0
             while i < len(dataset):
                 if len(dataset[i]) != 0:
     #                print(dataset[i])
+    
+                    #############################################
+                    # Getcountry name - need to change this date#
+                    #############################################
+                    if 'April 5, 2020' in dataset[i][0]:
+                        country.name = dataset[i][0]  + ' - ' + path[5:len(path)]
+                        
                     # Get percentages
                     for item in dataset[i]:
                         if '%' in item or 'Not enough data' in item: 
@@ -222,6 +204,7 @@ def processCSVs(input_folder, output_name):
                         
                     if any(word in dataset[i][0] for word in titles):
                         short = [[dataset[i][0]]]
+#                        print(short)
                         for x in range(1, 15): # for the next 15 lines check if the section ends
                             try:
                                 #when sector is complete
@@ -232,36 +215,55 @@ def processCSVs(input_folder, output_name):
                                 # keep adding info to sector until complete
                                 else:
                                     short.append(dataset[i+x])
-                            except Exception as e: 
-                                # residential sometimes wasn't getting added because it was
-                                # at the end of the file, this part just fixes that bug
+                            except: 
+                                # residential and parks are the last sectors in PDFs and sometimes they are not getting added 
                                 if short[0][0] == 'Residential': 
-                                    sector = getValues(short)
-                                    if len(country.sectors) == 5:
+                                    already_there = []
+                                    for s in country.sectors: already_there.append(s.name.getSector()[0])
+#                                    print('already_there:\t', already_there)
+                                    if 'Residential' not in already_there: 
+                                        sector = getValues(short)
                                         country.add_sector(sector)
-                                print('---> main\t\t', e)
+                                if short[0][0] == 'Parks': 
+                                    already_there = []
+                                    for s in country.sectors: already_there.append(s.name.getSector()[0])
+#                                    print('already_there:\t', already_there)
+                                    if 'Parks' not in already_there: 
+                                        sector = getValues(short)
+                                        country.add_sector(sector)
                 i += 1
             
+            # Check for duplicates
+            checkDuplicates(country)
+            
+            # Set Percentages and append to final list of countries
             percentages = getPercentage(percentages)
-            final.append([country.name])
             for i in range(len(country.sectors)):
-                # set percentages
                 country.sectors[i].name.percent = percentages[i]
-                last = ['']
-                for i in country.sectors[i].name.getSector():
-                    last.append(i)
-                final.append(last)
+            final.append(country)
                 
-        # Check for empty dates and correct
+        # Check for empty dates
         final = checkEmptyDates(final)
-        final = orderAlphabetically(final)
-        for a in final:
-            print(a)
+        
+        # Order alphabetically by name
+        #final.sort(key=lambda x: x.name)
+        
+        # Print info to console
+        for country in final:
+            print(country.name)
+            for sector in country.sectors:
+                print('\t',sector.name.getSector())
     
-        # Save info to a file
-        with open(output_name+'.csv', 'w', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerows(final)
+        # Save to CSV file
+        with open(output_name+'.csv', 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            for country in final:
+                writer.writerow([country.name])
+                for i in range(len(country.sectors)):
+                    space = ['']
+                    for i in country.sectors[i].name.getSector():
+                        space.append(i)
+                    writer.writerow(space)
         print('\nInformation saved to file', output_name+'.csv')
         
     else: print('Input folder does not exist')

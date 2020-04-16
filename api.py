@@ -56,7 +56,7 @@ def ask():
     if number == 5: 
         input_dir = input('Input folder (where CSVs are): ')
         output_name = input('What do you want to name the output file?: ')
-        print('Processing CSV files...')
+        print('\nProcessing CSV files...')
         processCSVs(input_dir, output_name)
 
     return number
