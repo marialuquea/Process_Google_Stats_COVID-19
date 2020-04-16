@@ -14,7 +14,6 @@ import glob
 import csv
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from country import CountryData, Sector
-from operator import itemgetter
 
 # split pages1 and 2 from every PDF
 def pdf_splitter(path, output):
@@ -145,13 +144,10 @@ def mergePDFs(path, output):
         if os.path.isdir(path + '/'):
             files = glob.glob(path+'/*.pdf') 
             sorted(files)
-#            print('Number of countries:',len(files)/2)
             for page in range(0, len(files), 2):
                 fileName = files[page].split("2020-")
                 name = fileName[1][6:-5]
-#                print(name)
                 paths = glob.glob(path+'/*'+name+'*')
-#                print(paths)
                 name = output + "/" + name +".pdf"
                 print(name)
                 merger(name, paths)
@@ -216,14 +212,12 @@ def processCSVs(input_folder, output_name):
                                 if short[0][0] == 'Residential': 
                                     already_there = []
                                     for s in country.sectors: already_there.append(s.name.getSector()[0])
-#                                    print('already_there:\t', already_there)
                                     if 'Residential' not in already_there: 
                                         sector = getValues(short)
                                         country.add_sector(sector)
                                 if short[0][0] == 'Parks': 
                                     already_there = []
                                     for s in country.sectors: already_there.append(s.name.getSector()[0])
-#                                    print('already_there:\t', already_there)
                                     if 'Parks' not in already_there: 
                                         sector = getValues(short)
                                         country.add_sector(sector)
