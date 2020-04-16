@@ -40,7 +40,7 @@ def merger(output_path, input_paths):
     with open(output_path, 'wb') as fh:
         pdf_writer.write(fh)
 
-# Get important values for each part (retail, grocery...)
+# Get important values for each sector (retail, grocery...)
 def getValues(short):
     # Name
     sector = Sector(short[0][0])
@@ -184,18 +184,14 @@ def processCSVs(input_folder, output_name):
             # Read only valuable information
             titles = ['Retail', 'Grocery', 'Parks', 'Transit', 'Work', 'Residential']
             country = CountryData()
+            if '+80%' not in dataset[1][0]: country.name = dataset[1][0] + ' - ' + path[5:len(path)]
             percentages = []
             i = 0
             while i < len(dataset):
-                if len(dataset[i]) != 0:
-    #                print(dataset[i])
-    
-                    #############################################
-                    # Getcountry name - need to change this date#
-                    #############################################
-                    if 'April 5, 2020' in dataset[i][0]:
-                        country.name = dataset[i][0]  + ' - ' + path[5:len(path)]
-                        
+                if len(dataset[i]) == 0: 
+                    if country.name.startswith(' - ') or country.name == '': 
+                        country.name = dataset[i+2][0] + ' - ' + path[5:len(path)]
+                else:
                     # Get percentages
                     for item in dataset[i]:
                         if '%' in item or 'Not enough data' in item: 
