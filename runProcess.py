@@ -146,25 +146,35 @@ def mergePDFs(path, output):
         # merge page 1 and 2 of each country and output them to folder PDFs
         if os.path.isdir(path + '/'):
             files = glob.glob(path+'/*.pdf') 
+            sorted(files)
+#            print('Number of countries:',len(files)/2)
             for page in range(0, len(files), 2):
-                paths = [files[page], files[page+1]]
-                name = output + "/" + files[page][18:35] +".pdf"
+                fileName = files[page].split("2020-")
+                name = fileName[1][6:-5]
+#                print(name)
+                paths = glob.glob(path+'/*'+name+'*')
+#                print(paths)
+                name = output + "/" + name +".pdf"
+                print(name)
                 merger(name, paths)
             print("\nPDFs merged!")
         else:
             print('Empty or wrong folder')
     except Exception as e: print(e)
 
-def convertToCSV(key, inputFolder):
+def convertToCSV(key, inputFolder, outputFolder):
     # Convert PDF to CSV with API
     try:
         import pdftables_api
         paths = glob.glob(inputFolder+'/*.pdf')
+        if len(paths) == 0:
+            print('Empty or wrong input folder')
+            return
         for path in paths:
-            name = inputFolder+'/'+path[5:-4]
-            c = pdftables_api.Client(key)
-            c.csv(path, name)
-        print('Success!')
+            name = outputFolder+path[len(inputFolder):-4]
+#            c = pdftables_api.Client(key)
+#            c.csv(path, name)
+            print(name)
     except Exception as e: print(e)
 
 def orderAlphabetically(final):

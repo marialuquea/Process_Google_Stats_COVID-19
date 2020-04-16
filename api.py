@@ -47,10 +47,11 @@ def ask():
         mergePDFs(input_dir, output)
 
     if number == 4:
+        print("\nUncomment lines 175 and 176 in runProcess.py for this to work. If you don't uncomment them, it will look as if it does work, but it actually doesn't haha.")
         key = input('API personal key to use: ')
         inputFolder = input('Input folder (where merged PDFs are located):')
-        print('Not currently working as this part costs money - uncomment line 52 in the api.py script for this part to work')
-        convertToCSV(key, inputFolder)
+        outputFolder = input('Output folder (where CSVs will go - this folder must already exist):')
+        convertToCSV(key, inputFolder, outputFolder)
         
     if number == 5: 
         input_dir = input('Input folder (where CSVs are): ')
