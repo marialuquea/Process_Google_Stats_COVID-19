@@ -50,7 +50,8 @@ def getValues(short):
     for x in short:
         for i in x:
             if any(word in i for word in months):
-                dates.append(i)
+                if len(i) < 11: dates.append(i)
+                else: dates.append(i[:10])
     try:
         # Dates - might be empty
         sector.startDate = dates[0]
