@@ -20,11 +20,10 @@ def pdf_splitter(path, output):
     try:
         fname = os.path.splitext(os.path.basename(path))[0]
         pdf = PdfFileReader(path)
-        #for page in range(2):
         pdf_writer = PdfFileWriter()
-        pdf_writer.addPage(pdf.getPage(0))
-        pdf_writer.addPage(pdf.getPage(1))
-        output_filename = output+'/{}_{}.pdf'.format(fname)
+        for page in range(2):
+            pdf_writer.addPage(pdf.getPage(page))
+        output_filename = output+'/{}_{}.pdf'.format(fname, page+1)
         with open(output_filename, 'wb') as out:
             pdf_writer.write(out)
         print('Created: {}'.format(output_filename))
