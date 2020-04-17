@@ -1,30 +1,30 @@
 Transit stations,,,
 ,+80%,Mobility trends for places like public transport,
 ,+40%,"hubs such as subway, bus, and train stations.",
--68%,Baseline,,
+-65%,Baseline,,
 ,-40%,,
 compared to baseline,,,
 ,-80%,,
-,Sun Feb 23,Sun Mar 15,Sun Apr 5
+,Sat Feb 29,Sat Mar 21,Sat Apr 11
 Workplaces,,,
 ,+80%,,Mobility trends for places of work.
 ,+40%,,
--47%,,,
+-48%,,,
 ,Baseline,,
 ,-40%,,
 compared to baseline,,,
 ,-80%,,
-,Sun Feb 23,Sun Mar 15,Sun Apr 5
+,Sat Feb 29,Sat Mar 21,Sat Apr 11
 Residential,,,
 ,+80%,,Mobility trends for places of residence.
 ,+40%,,
-+15%,Baseline,,
++18%,Baseline,,
 ,-40%,,
 compared to baseline,-80%,,
-,Sun Feb 23,Sun Mar 15,Sun Apr 5
+,Sat Feb 29,Sat Mar 21,Sat Apr 11
 
 COVID-19 Community Mobility Report,,,
-"New York April 5, 2020",,,
+"New York April 11, 2020",,,
 Mobility changes,,,
 Google prepared this report to help you and public health officials understand responses to social,,,
 "distancing guidance related to COVID-19. This report shouldn’t be used for medical diagnostic,",,,
@@ -38,28 +38,23 @@ We’ll leave a region out of the report if we don’t have statistically signif
 Retail & recreation,,,
 ,+80%,"Mobility trends for places like restaurants,",
 ,+40%,"cafes, shopping centers, theme parks,",
--59%,,"museums, libraries, and movie theaters.",
+-62%,,"museums, libraries, and movie theaters.",
 ,Baseline,,
 ,-40%,,
 compared to baseline,,,
-,-80%,,
-,Sun Feb 23,Sun Mar 15,Sun Apr 5
-Grocery & pharmacy,,,
-,+80%,,Mobility trends for places like grocery
-,,,"markets, food warehouses, farmers"
-,+40%,,
--28%,,"markets, specialty food shops, drug stores,",
-,Baseline,and pharmacies.,
-,-40%,,
-compared to baseline,,,
-,-80%,,
-,Sun Feb 23,Sun Mar 15,Sun Apr 5
-Parks,,,
-,+80%,,
-,,"Mobility trends for places like national parks,",
-,+40%,"public beaches, marinas, dog parks, plazas,",
--11%,,and public gardens.,
+Grocery & pharmacy,"-80%
+Sat Feb 29",Sat Mar 21,Sat Apr 11
+,+80%,,"Mobility trends for places like grocery
+markets, food warehouses, farmers"
+-4%,+40%,,"markets, specialty food shops, drug stores,"
+,Baseline,,and pharmacies.
+compared to baseline,-40%,,
+Parks,"-80%
+Sat Feb 29",Sat Mar 21,Sat Apr 11
+,+80%,,"Mobility trends for places like national parks,
+public beaches, marinas, dog parks, plazas,"
+-12%,+40%,,and public gardens.
 ,Baseline,,
-,-40%,,
-compared to baseline,-80%,,
-,Sun Feb 23,Sun Mar 15,Sun Apr 5
+compared to baseline,-40%,,
+,-80%,,
+,Sat Feb 29,Sat Mar 21,Sat Apr 11
