@@ -20,13 +20,14 @@ def pdf_splitter(path, output):
     try:
         fname = os.path.splitext(os.path.basename(path))[0]
         pdf = PdfFileReader(path)
-        for page in range(2):
-            pdf_writer = PdfFileWriter()
-            pdf_writer.addPage(pdf.getPage(page))
-            output_filename = output+'/{}_{}.pdf'.format(fname, page+1)
-            with open(output_filename, 'wb') as out:
-                pdf_writer.write(out)
-            print('Created: {}'.format(output_filename))
+        #for page in range(2):
+        pdf_writer = PdfFileWriter()
+        pdf_writer.addPage(pdf.getPage(0))
+        pdf_writer.addPage(pdf.getPage(1))
+        output_filename = output+'/{}_{}.pdf'.format(fname)
+        with open(output_filename, 'wb') as out:
+            pdf_writer.write(out)
+        print('Created: {}'.format(output_filename))
     except Exception as e: print(e)
 
 # Merge pages 1 and 2 for every country
@@ -129,6 +130,7 @@ def splitPDFs(folder, output):
         # split first 2 pages of each country from folder gdata2020-04-10
         # Change name of folder if PDFs are in another folder
         paths = glob.glob(folder + '/*.pdf')
+        print ("split PDFs count:", len(paths))
         if len(paths) != 0:
             if output != '' and os.path.isdir(output + '/'):
                 for path in paths:
@@ -143,7 +145,8 @@ def mergePDFs(path, output):
     try:
         # merge page 1 and 2 of each country and output them to folder PDFs
         if os.path.isdir(path + '/'):
-            files = glob.glob(path+'/*.pdf') 
+            files = glob.glob(path+'/*.pdf')
+            print("merge files count:", len(files) / 2)
             sorted(files)
             for page in range(0, len(files), 2):
                 fileName = files[page].split("2020-")
@@ -162,6 +165,7 @@ def convertToCSV(key, inputFolder, outputFolder):
     try:
         import pdftables_api
         paths = glob.glob(inputFolder+'/*.pdf')
+        print("CSVs count:", len(paths))
         if len(paths) == 0:
             print('Empty or wrong input folder')
             return
