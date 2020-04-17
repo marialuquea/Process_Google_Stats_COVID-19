@@ -2,7 +2,7 @@
 """
 Created on Mon Apr 13 20:40:38 2020
 
-@author: Maria
+@authors: Maria Luque Anguita and Francesco Pomponi
 
 This file splits the PDFs from the folder gdata2020-4-10 and creates a new folder 'output' 
 with all the 2-paged PDF of each country.
@@ -29,16 +29,6 @@ def pdf_splitter(path, output):
         print('Created: {}'.format(output_filename))
     except Exception as e: print(e)
 
-# Merge pages 1 and 2 for every country
-def merger(output_path, input_paths):
-    pdf_writer = PdfFileWriter()
-    for path in input_paths:
-        pdf_reader = PdfFileReader(path)
-        for page in range(pdf_reader.getNumPages()):
-            pdf_writer.addPage(pdf_reader.getPage(page))
-    with open(output_path, 'wb') as fh:
-        pdf_writer.write(fh)
-
 # Get important values for each sector (retail, grocery...)
 def getValues(short):
     # Name
@@ -47,13 +37,14 @@ def getValues(short):
     dates = []
     months = ['Jan ', 'Feb ', 'Mar ', 'Apr ', 'May ', 'Jun ',
               'Jul ', 'Aug ', 'Sep ', 'Oct ', 'Nov ', 'Dec ']
+    # If any part in csv hasa month in it, add to dates list
     for x in short:
         for i in x:
             if any(word in i for word in months):
                 if len(i) < 11: dates.append(i)
                 else: dates.append(i[:10])
     try:
-        # Dates - might be empty
+        # Dates - might be empty - get first and last 
         sector.startDate = dates[0]
         sector.endDate = dates[2]
         
@@ -63,12 +54,14 @@ def getValues(short):
     
 def checkEmptyDates(final):
     try:
+        # If any sector in the country has a date, make a copy of it in date1 and date2
         for country in final:
             date1 = ''
             date2 = ''
             for sector in country.sectors:
                 if sector.name.startDate != '': date1 = sector.name.startDate
                 if sector.name.endDate != '': date2 = sector.name.endDate
+            # loop again to check if any of the sector dates are empty and set them from date1 and date2
             for sector in country.sectors:
                 if sector.name.startDate == '': sector.name.startDate = date1
                 if sector.name.endDate == '': sector.name.endDate = date2
@@ -79,23 +72,28 @@ def checkEmptyDates(final):
 
 
 def getPercentage(percentages):
-    # Clean list from unwanted info
+    # Clean list from unwanted info 
     percentages = [x for x in percentages if '* Not' not in x]
     
     final = []
     percentage = ''
+    # loop starting at 0, until the end of list, in steps of 5
+    # because every sector has 5 percentages: +80%, +40%, the one we want, -40% and -80%
     for i in range(0, len(percentages), 5):
         short = []
         for j in range(5):
-            short.append(percentages[i+j])
-        percent_set = set(short)
+            short.append(percentages[i+j]) #add those 5 to list short
+        percent_set = set(short) 
+        '''             make it a set - no repeated elements - 
+        therefore if there are two 40s or 80s, the set will have a length of 4
+        if the percentage is different to 40 or 80, the set will have a length of 5   '''
         if len(percent_set) == 5: # if percentage is not 40% or 80%
             percentage = [ x for x in percent_set if "40" not in x and '80' not in x][0]
         else: # if percentage is either 40 or 80
-            if percentages.count('+80%') == 7: percentage = '+80%'
-            if percentages.count('-80%') == 7: percentage = '-80%'
-            if percentages.count('+40%') == 7: percentage = '+40%'
-            if percentages.count('-40%') == 7: percentage = '-40%'
+            if short.count('+80%') == 2: percentage = '+80%'
+            if short.count('-80%') == 2: percentage = '-80%'
+            if short.count('+40%') == 2: percentage = '+40%'
+            if short.count('-40%') == 2: percentage = '-40%'
         final.append(percentage)
     return final
     
@@ -111,9 +109,12 @@ def readCSV(path):
 def checkDuplicates(country):
     already_there = []
     duplicates = []
+    # add all sectors to list, even if sector was added twice
     for s in country.sectors: already_there.append(s.name.getSector()[0])
-    for s in already_there:
+    # check if sector was added twice and add name to duplicates list
+    for s in already_there: 
         if already_there.count(s) > 1: duplicates.append(s)
+    # loop through sectors in country, if the sector's name appears in duplicates, remove 1
     for s in country.sectors:
         if any(word in s.name.getSector()[0] for word in duplicates): 
             country.sectors.remove(s)
@@ -126,103 +127,105 @@ def checkDuplicates(country):
     
 def splitPDFs(folder, output):
     try:
-        # split first 2 pages of each country from folder gdata2020-04-10
-        # Change name of folder if PDFs are in another folder
+        # Make a list of all the PDF files in the specified folder
         paths = glob.glob(folder + '/*.pdf')
         print ("split PDFs count:", len(paths))
+        
+        # If folder is not empty
         if len(paths) != 0:
+            
+            # If output is not empty (where the PDFs will go) AND the directory exists
             if output != '' and os.path.isdir(output + '/'):
-                for path in paths:
-                    print(path)
-                    pdf_splitter(path, output)
+                
+                for path in paths: # For each PDF
+                    pdf_splitter(path, output) # Split PDFs
+                print('PDFs splitted!')
+                
             else: print('Output folder does not exist. Please create an empty folder with that name or select an existing one.')
         else: print("Input folder is empty or does not exist")
-        print('PDFs splitted!')
+        
     except Exception as e: print(e)
 
-def mergePDFs(path, output):
-    try:
-        # merge page 1 and 2 of each country and output them to folder PDFs
-        if os.path.isdir(path + '/'):
-            files = glob.glob(path+'/*.pdf')
-            print("merge files count:", len(files) / 2)
-            sorted(files)
-            for page in range(0, len(files), 2):
-                fileName = files[page].split("2020-")
-                name = fileName[1][6:-5]
-                paths = glob.glob(path+'/*'+name+'*')
-                name = output + "/" + name +".pdf"
-                print(name)
-                merger(name, paths)
-            print("\nPDFs merged!")
-        else:
-            print('Empty or wrong folder')
-    except Exception as e: print(e)
+
 
 def convertToCSV(key, inputFolder, outputFolder):
     # Convert PDF to CSV with API
     try:
         import pdftables_api
+        
+        # Make a list of all PDF files in input folder
         paths = glob.glob(inputFolder+'/*.pdf')
         print("CSVs count:", len(paths))
+        
         if len(paths) == 0:
             print('Empty or wrong input folder')
             return
+        
         for path in paths:
+            # Name is output folder plus name of file minus last 4 characters '.pdf'
             name = outputFolder+path[len(inputFolder):-4]
             c = pdftables_api.Client(key)
             c.csv(path, name)
             print(name)
+            
     except Exception as e: print(e)
 
+
+
 def processCSVs(input_folder, output_name):
+    # if directory exists
     if os.path.isdir(input_folder + '/'):
+        
+        # make a list of all CSV files in input folder
         paths = glob.glob(input_folder+'/*.csv')
         final = []
+        
         for path in paths:
+            
+            #read CSV
             dataset = readCSV(path)
-            # Read only valuable information
-            titles = ['Retail', 'Grocery', 'Parks', 'Transit', 'Work', 'Residential']
+            
+            # Make an empty country object from class CountryData
             country = CountryData()
-            if '+80%' not in dataset[1][0]: country.name = dataset[1][0] + ' - ' + path[5:len(path)]
+            
+            # In some files, the second line is the name, in others it is an 80, if not 80, set as country name
+            country.name = dataset[1][0] + ' - ' + path[5:len(path)]
+            
             percentages = []
             i = 0
-            while i < len(dataset):
-                if len(dataset[i]) == 0: 
-                    if country.name.startswith(' - ') or country.name == '': 
-                        country.name = dataset[i+2][0] + ' - ' + path[5:len(path)]
-                else:
+            while i < len(dataset): #loop through every line of CSV
+                
+                # if line is not empty
+                if len(dataset[i]) != 0:
+                    
                     # Get percentages
                     for item in dataset[i]:
                         if '%' in item or 'Not enough data' in item: 
                             if '\n' in item: percentages.append(item.split('\n')[0])
                             else: percentages.append(item)
-                        
+                    
+                    # Get sector name
+                    titles = ['Retail', 'Grocery', 'Parks', 'Transit', 'Work', 'Residential']
                     if any(word in dataset[i][0] for word in titles):
                         short = [[dataset[i][0]]]
-#                        print(short)
-                        for x in range(1, 15): # for the next 15 lines check if the section ends
+                        
+                        # for the next 15 lines check if the sector ends
+                        for x in range(1, 15): 
                             try:
-                                #when sector is complete
+                                # when sector is complete (another sector word is found)
                                 if any(word in dataset[i+x][0] for word in titles): 
                                     sector = getValues(short)
                                     country.add_sector(sector)
                                     break
-                                # keep adding info to sector until complete
-                                else:
+                                
+                                else: # keep adding info to sector until complete
                                     short.append(dataset[i+x])
                             except: 
-                                # residential and parks are the last sectors in PDFs and sometimes they are not getting added 
+                                # residentialis the last sectors in PDFs and sometimes it doesn't get added
                                 if short[0][0] == 'Residential': 
                                     already_there = []
                                     for s in country.sectors: already_there.append(s.name.getSector()[0])
                                     if 'Residential' not in already_there: 
-                                        sector = getValues(short)
-                                        country.add_sector(sector)
-                                if short[0][0] == 'Parks': 
-                                    already_there = []
-                                    for s in country.sectors: already_there.append(s.name.getSector()[0])
-                                    if 'Parks' not in already_there: 
                                         sector = getValues(short)
                                         country.add_sector(sector)
                 i += 1

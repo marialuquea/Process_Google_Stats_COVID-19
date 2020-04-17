@@ -2,7 +2,7 @@
 """
 Created on Tue Apr 14 09:28:59 2020
 
-@author: Maria
+@author: Maria Luque Anguita
 """
 
 class Sector(object):
