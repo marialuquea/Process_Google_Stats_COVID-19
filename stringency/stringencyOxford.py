@@ -81,12 +81,25 @@ for region, country_list in regions_list.items():
 #---------------------Calculate average per region
 for region, country_list in regions_list.items():
     if len(country_list.keys()) > 1:
-        print(region)
+        values = [i for i in country_list.values() if i != 'nan']
+        [float(i) for i in values]
+        average = sum(values) / len(values)
+        regions_list[region]['average'] = average
 
 #----------------------Save results to csv---------------------------
-with open('stringencyOxford.csv', 'w') as f:
-    for key in stringency_countries.keys():
-        f.write("%s,%s\n"%(key,stringency_countries[key]))
+with open('try2.csv', 'w') as f:
+    f.write('%s,%s,%s,%s\n'%('Region', 'Stringency', 'Date:',date))
+    for region, country_list in regions_list.items():
+        if len(country_list.keys()) == 1:
+            f.write("%s,%s\n"%(region, list(country_list.values())[0]))
+        else:
+            f.write("%s,%s,%s\n"%(region, 
+                                  country_list['average'],
+                                  country_list))
+        
+        
+ 
+
 
 
     
