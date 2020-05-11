@@ -14,8 +14,7 @@ from datetime import date
 
 url_start = 'https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/date-range/'
 
-date1 = input('Enter start date in the format YYYY-MM-DD:')
-date2 = input('Enter end date in the format YYYY-MM-DD:')
+date = input('Enter start date in the format YYYY-MM-DD:')
 
 # date1 = '2020-02-02'
 # date2 = '2020-02-03'
