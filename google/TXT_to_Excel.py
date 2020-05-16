@@ -8,6 +8,7 @@ import csv
 import glob
 import os
 
+
 #rename all files in folder
 path = 'txt_files'
 files = glob.glob(path + '/*.txt')
@@ -47,6 +48,7 @@ paths = glob.glob('txt_files/*.txt')
 for path in paths:
     print(path)
     dataset = read_file(path)
+    print(dataset)
 
     scenario = []
     for row in dataset:
@@ -81,15 +83,17 @@ def processColumn(column):
     if column == 3: SO2_final.append(scenarios)
     if column == 4: NOx_final.append(scenarios)
     
-    for i in range(len(regions)): 
+    for i in range(len(regions)):  # for i in range 38
         new_row = [regions[i]] # region name 
         for j in range(len(scenarios) - 1): # for every scenario
             # print(i+(38*(j)), GHG_reduction[i+(38*(j))])
             if column == 1: new_row.append(GHG_reduction[i+(38*(j))])
+            # print('new_row\t',new_row)
             if column == 2: new_row.append(PM2_reduction[i+(38*(j))])
             if column == 3: new_row.append(SO2_reduction[i+(38*(j))])
             if column == 4: new_row.append(NOx_reduction[i+(38*(j))])
         if column == 1: GHG_final.append(new_row)
+    # print('GHG_final\t',GHG_final)
         if column == 2: PM2_final.append(new_row)
         if column == 3: SO2_final.append(new_row)
         if column == 4: NOx_final.append(new_row)
@@ -104,13 +108,13 @@ def save_file(name, column):
         if column == 4: writer.writerows(NOx_final)
         
 processColumn(1)
-save_file('GHG', 1)
+save_file('GHG_regions_bytotal_scenarios', 1)
 processColumn(2)
-save_file('PM2', 2)
+save_file('PM2_regions_bytotal_scenarios', 2)
 processColumn(3)
-save_file('SO2', 3)
+save_file('SO2_regions_bytotal_scenarios', 3)
 processColumn(4)
-save_file('NOx', 4)
+save_file('NOx_regions_bytotal_scenarios', 4)
 
 # del row, line, a, path, dataset, scenario, i, j, writer, new_row, csvfile
     
