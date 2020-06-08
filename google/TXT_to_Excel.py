@@ -10,7 +10,7 @@ import os
 
 
 #rename all files in folder
-path = 'txt_files'
+path = '0706'
 files = glob.glob(path + '/*.txt')
 if 'scenario_001.txt' in files:
     print('Name of files already changed')
@@ -44,11 +44,10 @@ SO2_reduction = []
 NOx_reduction = []
     
     
-paths = glob.glob('txt_files/*.txt')
+paths = glob.glob('0706/*.txt')
 for path in paths:
     print(path)
     dataset = read_file(path)
-    print(dataset)
 
     scenario = []
     for row in dataset:

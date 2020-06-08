@@ -1,0 +1,39 @@
+Region,Stringency,Date:,20200529
+Australia,66.67
+Brazil,80.48
+Canada,70.95
+China,78.1
+France,nan
+Germany,53.57
+Hong Kong,60.71
+India,79.76
+Indonesia,nan
+Iran,60.71
+Italy,75.0
+Japan,40.48
+Malaysia,82.14
+Mexico,86.9
+Middle East,83.9875,,DZA,Algeria,88.1,BHR,Bahrain,83.33,EGY,Egypt,96.43,ISR,Israel,84.52,JOR,Jordan,nan,KWT,Kuwait,nan,LBN,Lebanon,nan,LBY,Libya,82.14,OMN,Oman,83.33,PSE,Palestine,83.33,SAU,Saudi Arabia,78.57,SYR,Syria,82.86,TUN,Tunisia,84.52,TUR,Turkey,91.67,YEM,Yemen,69.05,average,83.9875,
+Nigeria,91.67
+Rest of Africa,74.34266666666664,,BEN,Benin,63.1,BWA,Botswana,67.38,BFA,Burkina Faso,67.86,BDI,Burundi,nan,CPV,Cabo Verde,76.19,CMR,Cameroon,76.19,CAF,Central African Republic,nan,TCD,Chad,91.67,COM,Comoros,nan,CIV,Cote d'Ivoire,64.29,COD,Democratic Republic of the Congo,nan,DJI,Djibouti,61.43,ERI,Eritrea,96.43,SWZ,Eswatini,96.43,ETH,Ethiopia,76.19,GMB,Gambia,nan,GHA,Ghana,64.29,GIN,Guinea,83.33,GNB,Guinea-Bissau,nan,KEN,Kenya,91.67,LSO,Lesotho,nan,LBR,Liberia,88.1,MDG,Madagascar,65.0,MWI,Malawi,67.86,MLI,Mali,64.29,MRT,Mauritania,nan,MUS,Mauritius,88.1,MAR,Morocco,nan,MOZ,Mozambique,73.81,NAM,Namibia,75.0,NER,Niger,42.86,RWA,Rwanda,86.9,STP,Sao Tome and Principe,nan,SEN,Senegal,71.43,SYC,Seychelles,63.1,SLE,Sierra Leone,80.95,SOM,Somalia,nan,SSD,South Sudan,nan,SDN,Sudan,nan,TGO,Togo,nan,UGA,Uganda,83.33,TZA,Tanzania,50.0,ZMB,Zambia,57.86,EAZ,Zanzibar,nan,ZWE,Zimbabwe,95.24,average,74.34266666666664,
+Rest of Central America,79.1781818181818,,AIA,Anguilla,nan,ATG,Antigua and Barbuda,nan,ABW,Aruba,50.0,BHS,Bahamas,nan,BRB,Barbados,84.52,BLZ,Belize,nan,BMU,Bermuda,86.9,VGB,British Virgin Islands,nan,CYM,Cayman Islands,nan,CRI,Costa Rica,79.29,CUB,Cuba,nan,CUW,Curacao,nan,DMA,Dominica,nan,DOM,Dominican Republic,91.67,SLV,El Salvador,100.0,GRD,Grenada,nan,GTM,Guatemala,nan,HTI,Haiti,86.9,HND,Honduras,nan,JAM,Jamaica,91.67,MSR,Montserrat,nan,NIC,Nicaragua,14.29,PAN,Panama,96.43,PRI,Puerto Rico,89.29,KNA,Saint Kitts and Nevis,nan,LCA,Saint Lucia,nan,VCT,Saint Vincent and the Grenadines,nan,SXM,Sint Maarten,nan,TTO,Trinidad and Tobago,nan,TCA,Turks and Caicos Islands,nan,average,79.1781818181818,
+Rest of East Asia,67.86,,PRK,North Korea,nan,MNG,Mongolia,67.86,average,67.86,
+Rest of EU,70.253125,,AND,Andorra,72.62,AUT,Austria,nan,BEL,Belgium,75.0,BGR,Bulgaria,64.29,HRV,Croatia,69.05,CYP,Cyprus,92.86,CZE,Czech Republic,41.67,EST,Estonia,53.57,GRC,Greece,74.52,HUN,Hungary,79.76,IRL,Ireland,84.52,LVA,Latvia,nan,LTU,Lithuania,79.76,LUX,Luxembourg,51.9,MLT,Malta,nan,NLD,Netherlands,nan,POL,Poland,88.1,PRT,Portugal,79.76,ROU,Romania,nan,SMR,San Marino,70.24,SVK,Slovakia,nan,SVN,Slovenia,46.43,average,70.253125,
+Rest of Europe,79.765,,ALB,Albania,89.29,BIH,Bosnia and Herzegovina,nan,LIE,Liechtenstein,nan,MCO,Monaco,nan,MNE,Montenegro,nan,MKD,North Macedonia,nan,SRB,Serbia,nan,CHE,Switzerland,70.24,average,79.765,
+Rest of FSU,80.15666666666667,,ARM,Armenia,nan,AZE,Azerbaijan,82.14,BLR,Belarus,nan,GEO,Georgia,77.38,KAZ,Kazakhstan,86.9,KGZ,Kyrgyzstan,83.33,MDA,Moldova,86.9,TJK,Tajikistan,64.29,TKM,Turkmenistan,nan,UKR,Ukraine,nan,UZB,Uzbekistan,nan,average,80.15666666666667,
+Rest of Oceania,44.345,,COK,Cook Islands,nan,FJI,Fiji,nan,PYF,French Polynesia,nan,KIR,Kiribati,nan,MHL,Marshall Islands,nan,FSM,Micronesia (Federated States of),nan,NRU,Nauru,nan,NCL,New Caledonia,nan,NZL,New Zealand,38.1,PLW,Palau,nan,PNG,Papua New Guinea,50.0,WSM,Samoa,nan,SLB,Solomon Islands,57.14,TLS,Timor-Leste,32.14,TON,Tonga,nan,TUV,Tuvalu,nan,VUT,Vanuatu,nan,average,44.345,
+Rest of OPEC,86.82333333333334,,AGO,Angola,86.9,COG,Congo,84.52,ECU,Ecuador,85.24,GNQ,Equatorial Guinea,nan,GAB,Gabon,86.9,IRQ,Iraq,nan,QAT,Qatar,91.67,VEN,Venezuela,85.71,average,86.82333333333334,
+Rest of South America,85.64857142857143,,ARG,Argentina,nan,BOL,Bolivia,nan,CHL,Chile,75.0,COL,Colombia,91.67,GUY,Guyana,95.24,PRY,Paraguay,88.1,PER,Peru,91.67,SUR,Suriname,78.1,URY,Uruguay,79.76,average,85.64857142857143,
+Rest of South Asia,87.38199999999999,,AFG,Afghanistan,83.33,BGD,Bangladesh,96.43,BTN,Bhutan,91.67,MDV,Maldives,nan,NPL,Nepal,nan,PAK,Pakistan,88.1,LKA,Sri Lanka,77.38,average,87.38199999999999,
+Rest of South East Asia,71.545,,BRN,Brunei,63.81,KHM,Cambodia,60.71,LAO,Lao People's Democratic Republic,60.71,MMR,Myanmar,79.76,PHL,Philippines,86.9,VNM,Vietnam,77.38,average,71.545,
+Russia,nan
+Scandinavia,63.93000000000001,,DNK,Denmark,76.9,FIN,Finland,64.29,GRL,Greenland,72.62,ISL,Iceland,46.43,NOR,Norway,63.1,SWE,Sweden,60.24,average,63.93000000000001,
+Singapore,84.52
+South Africa,nan
+South Korea,59.05
+Spain,85.24
+Taiwan,28.57
+Thailand,78.57
+UAE,83.33
+UK,72.62
+USA,72.14

@@ -76,14 +76,14 @@ for country in countries_list:
 
     
 # date = input('Enter start date in the format YYYYMMDD:')
-date = '20200507' 
+date = '20200529' 
 
 for index, row in data.iterrows():   
     if row['Date'] == int(date):    
         # print(key in stringency_countries if row['CountryCode'] in key)
         countryName = [key for key,val in stringency_countries.items() if row['CountryCode'] in key[:3]]
         if len(countryName) != 0 and countryName[0] in stringency_countries:
-            stringency = [row['LegacyStringencyIndexForDisplay'] for key,val in stringency_countries.items() if row['CountryCode'] in key]
+            stringency = [row['StringencyLegacyIndexForDisplay'] for key,val in stringency_countries.items() if row['CountryCode'] in key]
             stringency_countries[countryName[0]] = stringency[0]
 
 
@@ -120,7 +120,7 @@ for region, country_list in regions_list.items():
         regions_list[region]['average'] = avg
 
 #----------------------Save results to csv---------------------------
-with open('stringency_20200507_1.csv', 'w') as f:
+with open('stringency_20200529.csv', 'w') as f:
     f.write('%s,%s,%s,%s\n'%('Region', 'Stringency', 'Date:',date))
     for region, country_list in regions_list.items():
         if len(country_list.keys()) == 1:
