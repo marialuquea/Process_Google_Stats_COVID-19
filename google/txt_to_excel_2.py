@@ -59,7 +59,7 @@ for p in files:
    
 titles.insert(0, "")
      
-with open('try4.csv', 'w', newline='') as csvfile:
+with open('9-6-20-inTextResults.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(titles)
     writer.writerows(results)

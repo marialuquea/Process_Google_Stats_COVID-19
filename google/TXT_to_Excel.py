@@ -10,7 +10,7 @@ import os
 
 
 #rename all files in folder
-path = '0706'
+path = input('folder name: ')
 files = glob.glob(path + '/*.txt')
 if 'scenario_001.txt' in files:
     print('Name of files already changed')
@@ -43,8 +43,7 @@ PM2_reduction = []
 SO2_reduction = []
 NOx_reduction = []
     
-    
-paths = glob.glob('0706/*.txt')
+paths = glob.glob(path + '/*.txt')
 for path in paths:
     print(path)
     dataset = read_file(path)
@@ -107,13 +106,13 @@ def save_file(name, column):
         if column == 4: writer.writerows(NOx_final)
         
 processColumn(1)
-save_file('GHG_regions_bytotal_scenarios', 1)
+save_file('9-6-20-GHG_regions_bypercent_scenarios', 1)
 processColumn(2)
-save_file('PM2_regions_bytotal_scenarios', 2)
+save_file('9-6-20-PM2_regions_bypercent_scenarios', 2)
 processColumn(3)
-save_file('SO2_regions_bytotal_scenarios', 3)
+save_file('9-6-20-SO2_regions_bypercent_scenarios', 3)
 processColumn(4)
-save_file('NOx_regions_bytotal_scenarios', 4)
+save_file('9-6-20-NOx_regions_bypercent_scenarios', 4)
 
 # del row, line, a, path, dataset, scenario, i, j, writer, new_row, csvfile
     
